@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-GITHUB_REPO_NAME = 'bridgetown-automation-turbolinks'
+GITHUB_REPO_NAME = 'bridgetown-automation-stimulus'
 BRANCH = `git branch --show-current`.chomp.freeze || 'master'
 
 class IntegrationTest < Minitest::Test
@@ -18,15 +18,22 @@ class IntegrationTest < Minitest::Test
   def run_assertions
     index_js = read_test_file('frontend/javascript/index.js')
 
-    # Turbolinks added
-    assert(index_js =~ /import Turbolinks from "turbolinks"/)
-    assert(index_js =~ /Turbolinks.start\(\)/)
+    # Stimulus imported
+    assert_match(index_js, /import { Application } from "stimulus"/)
+    assert_match(index_js, %r!import { definitionsFromContext } from "stimulus/webpack-helpers"!)
 
-    # Make sure package.json contains it as dependency
-
+    assert_match(index_js, //)
+    # Make sure package.json contains stimulus
     package_json = read_test_file('package.json')
 
-    assert(package_json =~ /turbolinks/)
+    assert_match(index_js, /const application = Application.start()/)
+    assert_match(index_js, %r{const context = require.context('./controllers', true, /\.js$/)})
+    assert_match(index_js, /application.load(definitionsFromContext(context))/)
+
+    # Check the directory was created
+    controller_dir = File.join(TEST_APP, 'frontend', 'javascript', 'controllers')
+    assert Dir.exist?(File.join(controller_dir))
+    assert File.exist?(File.join(controller_dir, 'example_controller.js'))
   end
 
   def test_it_works_with_local_automation
