@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USER_ID: ${USER_ID:-1000}
+        GROUP_ID: ${GROUP_ID:-1000}
+        DOCKER_USER: ${DOCKER_USER:-user}
+        APP_DIR: ${APP_DIR:-/home/user/bridgetown-app}
+
+    command: bash -c "yarn start --host '0.0.0.0'"
+
+    ports:
+      - '4000:4000'
+      # Not totally necessary to open 4001, but it is used, so lets make it discoverable
+      - '4001:4001'
+      - '4002:4002'
+
+    volumes:
+      - .:${APP_DIR:-/home/user/bridgetown-app}
+      # this separates node_modules from the host
+      - node_modules:${APP_DIR:-/home/user/bridgetown-app}/node_modules
+
+volumes:
+  node_modules:
