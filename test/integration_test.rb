@@ -19,16 +19,15 @@ class IntegrationTest < Minitest::Test
     index_js = read_test_file('frontend/javascript/index.js')
 
     # Stimulus imported
-    assert_match(index_js, /import { Application } from "stimulus"/)
-    assert_match(index_js, %r!import { definitionsFromContext } from "stimulus/webpack-helpers"!)
+    assert_match(/import { Application } from "stimulus"/, index_js)
+    assert_match(%r!import { definitionsFromContext } from "stimulus/webpack-helpers"!, index_js)
 
-    assert_match(index_js, //)
     # Make sure package.json contains stimulus
     package_json = read_test_file('package.json')
 
-    assert_match(index_js, /const application = Application.start()/)
-    assert_match(index_js, %r{const context = require.context('./controllers', true, /\.js$/)})
-    assert_match(index_js, /application.load(definitionsFromContext(context))/)
+    assert_match(/const application = Application.start()/, index_js)
+    assert_match(%r{const context = require.context('./controllers', true, /\.js$/)}, index_js)
+    assert_match(/application.load(definitionsFromContext(context))/, index_js)
 
     # Check the directory was created
     controller_dir = File.join(TEST_APP, 'frontend', 'javascript', 'controllers')
