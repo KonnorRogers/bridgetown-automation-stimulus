@@ -1,21 +1,35 @@
 # frozen_string_literal: true
 
-say 'Installing Turbolinks...', :green
+require 'fileutils'
 
-run('yarn add turbolinks')
+say 'Installing Stimulus...', :green
 
-say 'Adding Turbolinks to "frontend/javascript/index.js"', :magenta
+run('yarn add stimulus')
+
+say 'Adding Stimulus to "frontend/javascript/index.js"...', :magenta
 
 javascript_import do
   <<~JS
-    import Turbolinks from "turbolinks"
+    import { Application } from "stimulus"
+    import { definitionsFromContext } from "stimulus/webpack-helpers"
   JS
 end
 
 append_to_file('frontend/javascript/index.js') do
   <<~JS
-    Turbolinks.start()
+    const application = Application.start()
+    const context = require.context("./controllers", true, /\.js$/)
+    application.load(definitionsFromContext(context))
   JS
 end
 
-say 'Turbolinks successfully added', :green
+say 'Creating a `./frontend/javascript/controllers/` directory...', :magenta
+FileUtils.mkdir_p('frontend/javascript/controllers')
+
+say 'Stimulus successfully added', :green
+
+say 'To start adding controllers, visit the `./frontend/javascript/controllers/` directory', :blue
+
+say 'Make sure your controllers follow the `[name]_controller.js` convention', :blue
+
+say 'For further reading, check out "https://stimulusjs.org/"', :blue
