@@ -31,7 +31,11 @@ bridgetown new <newsite> --apply="https://github.com/ParamagicDev/bridgetown-aut
 
 ## Getting Started
 
-There should be nothing to do on your end, it should "just work"
+### Adding controllers
+
+Controllers should be placed in the `./frontend/javascript/controllers/` directory.
+Make sure the controllers follow the `[name]_controller.js` convention.
+Check out more @ [stimulusjs.org](https://stimulusjs.org)
 
 ## Testing the "apply" command locally
 
