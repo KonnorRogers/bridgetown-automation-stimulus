@@ -26,7 +26,7 @@ class IntegrationTest < Minitest::Test
     package_json = read_test_file('package.json')
 
     assert_match(/const application = Application.start()/, index_js)
-    assert_match(%r{const context = require.context('./controllers', true, /\.js$/)}, index_js)
+    assert_match(%r{const context = require.context\("./controllers", true, /\.js\$/\)}, index_js)
     assert_match(/application.load(definitionsFromContext(context))/, index_js)
 
     # Check the directory was created
