@@ -27,7 +27,7 @@ class IntegrationTest < Minitest::Test
 
     assert_match(/const application = Application.start()/, index_js)
     assert_match(%r{const context = require.context\("./controllers", true, /\.js\$/\)}, index_js)
-    assert_match(/application.load(definitionsFromContext(context))/, index_js)
+    assert_match(/application.load\(definitionsFromContext\(context\)\)/, index_js)
 
     # Check the directory was created
     controller_dir = File.join(TEST_APP, 'frontend', 'javascript', 'controllers')
