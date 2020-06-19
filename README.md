@@ -1,5 +1,3 @@
-# WORK IN PROGRESS
-
 # Purpose
 
 To provide an easy way for Bridgetown users to add Stimulus to their project.
