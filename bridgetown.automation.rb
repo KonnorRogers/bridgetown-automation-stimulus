@@ -4,7 +4,7 @@ require 'fileutils'
 
 say 'Installing Stimulus...', :green
 
-run('yarn add stimulus')
+run('yarn add -D stimulus')
 
 say 'Adding Stimulus to "frontend/javascript/index.js"...', :magenta
 
