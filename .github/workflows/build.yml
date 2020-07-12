@@ -15,4 +15,5 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build and test with Rake / Docker
         run: |
+          source docker.env
           docker-compose up --build
