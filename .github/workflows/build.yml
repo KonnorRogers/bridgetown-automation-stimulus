@@ -13,6 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Build and test with Rake
+      - name: Build and test with Rake / Docker
         run: |
           docker-compose up --build
