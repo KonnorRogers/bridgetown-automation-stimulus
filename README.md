@@ -1,3 +1,5 @@
+![build](https://github.com/ParamagicDev/bridgetown-automation-stimulus/workflows/build/badge.svg)
+
 # Purpose
 
 To provide an easy way for Bridgetown users to add Stimulus to their project.
