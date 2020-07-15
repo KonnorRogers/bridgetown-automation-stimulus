@@ -7,7 +7,7 @@ To provide an easy way for Bridgetown users to add Stimulus to their project.
 ## Prerequisites
 
 - Ruby >= 2.5
-- Bridgetown ~> 0.15.0
+- Bridgetown >= 0.15.0
 
 ```bash
 bridgetown -v
